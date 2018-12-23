@@ -11,6 +11,9 @@ class comfy_home():
         self.driver.switch_to.window(self.driver.window_handles[1])
     def setUp(self):
         self.driver.get("https://comfy.ua/")
+    def close_p(self):
+        self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[0])
     def langtr(self):
         self.cre_new_p()
         self.setUp()
@@ -20,8 +23,7 @@ class comfy_home():
             elem = self.driver.find_element_by_xpath('//*[@class="store-switcher__link store-switcher__link_ru js-lang-switch"]')
         elem.click()
         time.sleep(5)
-        self.driver.close()
-        self.driver.switch_to.window(self.driver.window_handles[0])
+        self.close_p()
     def searchtr(self):
         self.cre_new_p()
         self.setUp()
@@ -29,8 +31,7 @@ class comfy_home():
         elem.send_keys("Iphone Xs max")
         elem.send_keys(Keys.RETURN)
         time.sleep(10)
-        self.driver.close()
-        self.driver.switch_to.window(self.driver.window_handles[0])
+        self.close_p()
 
 if __name__=="__main__":
     a=comfy_home()
