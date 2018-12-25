@@ -1,119 +1,76 @@
-import os
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from time import sleep
+from locators import *
 
 
-class RozetkaMP(object):
-    WEB_LINK = 'https://rozetka.com.ua/mobile-phones/c80003/'
+class BasePage:
+    def __init__(self, browser=None):
+        self.browser = browser if browser else Chrome()
 
-    def __init__(self):
-        # chrome_options = Options()
-        # chrome_options.headless = True
-        self.browser = Chrome(#executable_path=os.path.abspath('chromedriver'),
-                              #chrome_options=chrome_options
-                )
-        self.browser.maximize_window()
-        self.browser.get(self.WEB_LINK)
-        #sleep(2)
 
-    def sort(self, sort_type):
-        self.browser.find_element_by_xpath('//*[@id="sort_view"]/a').click()
-        if sort_type == 'cheap':
-            self.browser.find_element_by_xpath('//*[@id="filter_sortcheap"]').click()
-        elif sort_type == 'expensive':
-            self.browser.find_element_by_xpath('//*[@id="filter_sortexpensive"]/a').click()
-        elif sort_type == 'popularity':
-            self.browser.find_element_by_xpath('//*[@id="filter_sortpopularity"]/a').click()
-        elif sort_type == 'novelty':
-            self.browser.find_element_by_xpath('//*[@id="filter_sortnovelty"]/a').click()
-        elif sort_type == 'action':
-            self.browser.find_element_by_xpath('//*[@id="filter_sortaction"]/a').click()
-        elif sort_type == 'rank':
-            self.browser.find_element_by_xpath('//*[@id="filter_sortrank"]/a').click()
+class BasePageElement:
+    def __init__(self, browser=None):
+        self.browser = browser if browser else Chrome()
 
-    def compare(self):
-        pass
 
-    # Options
-    def state(self):
-        pass
+class Link(BasePageElement):
+    def __init__(self, browser, locator):
+        super().__init__(browser)
+        self.locator = self.browser.find_element(locator)
 
-    def brand(self, name):
-        self.browser.find_element_by_xpath('//*[@id="filter_producer_5964"]/label/a/span').click()
+    def click(self):
+        self.locator.click()
 
-    def series(self, name):
-        pass
 
-    def credit(self):
-        pass
+class MobilePhonesPage(BasePage):
+    def __init__(self, browser):
+        super().__init__(browser)
+        self.header = ElementHeader(self.browser)
 
-    def conn_type(self, conn_type):
-        if conn_type == '2G':
-            self.browser.find_element_by_xpath(
-                    '//*[@id="filter_standart-svyazi-83148_406358"]/label/a/span').click()
-        elif conn_type == '3G':
-            self.browser.find_element_by_xpath(
-                    '//*[@id="filter_standart-svyazi-83148_406358"]/label/a/span').click()
-        elif conn_type == '4G':
-            self.browser.find_element_by_xpath(
-                    '//*[@id="filter_standart-svyazi-83148_406363"]/label/a/span').click()
-        elif conn_type == 'CDMA':
-            self.browser.find_element_by_xpath(
-                    '//*[@id="filter_standart-svyazi-83148_790316"]/label/a/span').click()
+    def switch_lang(self, language):
+        if language == 'RU':
+            self.header.switch_to_ru()
+        elif language == 'UA':
+            self.header.switch_to_ua()
+        return self
 
-    def seller(self, name='Rozetka'):
-        if name == 'Rozetka':
-            self.browser.find_element_by_xpath('//*[@id="filter_seller_1"]/label/a/span').click()
-        else:
-            self.browser.find_element_by_xpath('//*[@id="filter_seller_2"]/label/a/span').click()
 
-    # display options
-    def disp_size(self):
-        pass
+class ElementHeader(BasePageElement):
+    def __init__(self, browser):
+        super().__init__(browser)
+        self.ru_button = Link(self.browser, 'store-switcher__link_ru')
+        self.ua_button = Link(self.browser, 'store-switcher__link_ua')
 
-    def disp_res(self):
-        pass
+    def switch_to_ua(self):
+        self.ua_button.click()
 
-    def disp_type(self):
-        pass
+    def switch_to_ru(self):
+        self.ru_button.click()
 
-    def price(self, p_from='', p_to=''):
-        self.browser.find_element_by_xpath('//*[@id="price[min]"]').send_keys(p_from)
-        self.browser.find_element_by_xpath('//*[@id="price[max]"]').send_keys(p_to)
-        self.browser.find_element_by_id('submitprice').click()
 
-    def battery(self):
-        pass
+class ElementOptions(BasePageElement):
+    def __init__(self, browser):
+        super().__init__(browser)
+        # add options logic here
 
-    def rom(self):
-        pass
 
-    def int_mem(self):
-        pass
+class ElementSorting(BasePageElement):
+    def __init__(self, browser):
+        super().__init__(browser)
+        # add options logic here
 
-    def main_cam(self):
-        pass
 
-    def front_cam(self):
-        pass
+class ElementProductList(BasePageElement):
+    def __init__(self, browser):
+        super().__init__(browser)
+        # add ProductList logic here
 
-    def popular_opts(self):
-        pass
 
-    def os_type(self):
-        pass
-
-    def color(self):
-        pass
-
-    def phone_class(self):
-        self.browser.find_element_by_xpath('//*[@id="filter_presetsmartfon"]/label/a/span').click()
+#print(ElementHeader.__mro__)
 
 rozetka = RozetkaMP()
-#rozetka.brand('Xiaomi')
-#rozetka.sort('cheap')
-rozetka.phone_class()
+# rozetka.smartphone_filter()
+# rozetka.brand('Xiaomi')
+# rozetka.sort('cheap')
 rozetka.price('', '5000')
 
