@@ -1,10 +1,11 @@
 from selenium.webdriver.common.by import By
 
-# furniture header
+
 class Header:
     # Commercial banner
-    HEAD_BANNER = (By.NAME, 'head_banner')
+    TOP_BANNER = (By.NAME, 'head_banner')
     LANG_SWITCHER = (By.XPATH, '//div[@class="lang-switcher-i"]/a[@class="lang-switcher-link whitelink"]')
+    LOG_IN_LINK = (By.XPATH, '//span[@id="header_user_menu_parent"]/a')
     SIGHN_IN = (By.NAME, 'signin')
 
     FAQ_LINK = (By.XPATH, '//ul[@name="header-top-menu"]/li/a[@href="https://rozetka.com.ua/ua/faq/"]')
@@ -32,6 +33,8 @@ class Header:
 
 
 class SideBarMenu:
+    PRODUCTS_FOR_HOME = (By.CLASS_NAME, '//ul[@class="clearfix breadcrumbs-catalog"]/li/'
+                                       'a[@href="https://rozetka.com.ua/ua/tovary-dlya-doma/c2394287/"]')
     FRAMELESS_FURNITURE = (By.XPATH, '//*[@id="menu_categories_left"]/li/p/'
                                      'a[@href="https://rozetka.com.ua/ua/beskarkasnaya-mebel/c154006/"]')
     COMPUTER_TABLES = (By.XPATH, '//*[@id="menu_categories_left"]/li/p/'
@@ -104,16 +107,47 @@ class SideBarMenu:
                                                 'https://rozetka.com.ua/ua/yhod-i-hranenie-odejdy-i-obyvi/c4629263/"]')
 
 
-class PopularProduct:
-    ''
-
-
-class Feedback:
-    ''
-
+class Footer:
+    SCHEDULE_CALL_CENTER_LINK = (By.XPATH, '//ul[@class="schedule-l"]/li/'
+                                      'a[@href="https://rozetka.com.ua/ua/contacts/"]')
+    #
+    BONUS_ACCOUNT = (By.XPATH, '//li[@name="page_loyalty"/a')
+    GIFT_CERTIFICATES_LINK = (By.XPATH, '//li[@name="page_gift"]/a')
+    RETURNING_GOODS_LINK = (By.XPATH, '//a[@href="https://service.rozetka.com.ua/"]')
+    SERVISE_CENTERS_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/service-centers/"]')
+    FAQ_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/faq/"]')
+    TERMS_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/terms/"]')
+    #
+    ABOUT_US_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/about/"]')
+    CONTACTS_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/contacts/"]')
+    PARTNERSHIP_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/partnership/"]')
+    SELL_ON_ROZETKA_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/newseller/"]')
+    VACANCY_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/jobs/"]')
+    TRANSFER_CARD_TO_CARD_LINK = (By.XPATH, '//a[@href="https://rozetka.com.ua/ua/jobs/"]')
+    #
+    EMAIL_FIELD = (By.NAME, 'email')
+    SUBSCRIBE_BTN = (By.XPATH, '//span[@class="newsletter-subscription-btn"/button')
+    #OWOX
+    OWOX_LINK = (By.CLASS_NAME, 'logo-owox-link')
+    #Social media
+    FACEBOOK_LINK = (By.XPATH, '//a[@title="Facebook"]')
+    TWITTER_LINK = (By.XPATH, '//a[@title="Twitter"]')
+    GOOGLE_PLUS_LINK = (By.XPATH, '//a[@title="Google+"]')
+    YOUTUBE_LINK = (By.XPATH, '//a[@title="YouTube"]')
+    INSTAGRAM_LINK = (By.XPATH, '//a[@title="Instagram"]')
+    VIBER_LINK = (By.XPATH, '//a[@title="Vider"]')
+    #mobile
+    APP_STORE_LINK = (By.XPATH, '//a[href="https://rozetka.com.ua/go/https:/itunes.apple.com/app/apple-store/'
+                                'id740469631/?pt=3132803&ct=fullversion&at=1000l3MB&mt=8"]/img')
+    GOOGLE_PLAY_LINK = (By.XPATH, '//a[href="https://rozetka.com.ua/go/https:/play.google.com/store/apps/'
+                                'details/?id=ua.com.rozetka.shop&referrer=utm_source%3Dfullversion%26utm_medium%3Dsite'
+                                '%26utm_campaign%3Dfullversion"]/img')
+    MOBILE_VERSION_LINK = (By.ID, 'footer-mobile-link')
+    #
+    VERIFIED_VISA = (By.ID, 'visa_elem')
+    MASTERCARD = (By.ID, 'mastercard_elem')
 
 
 class Popup:
     CLOSE_COMMR_POPUP = (By.CLASS_NAME, 'exponea-close-cross')
     CLOSE_LANG_POPUP = (By.CLASS_NAME, 'popup-close')
-
